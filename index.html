@@ -6,7 +6,6 @@
 <title>Sedatur Music</title>
 
 <style>
-
 *{
 box-sizing:border-box;
 }
@@ -14,618 +13,304 @@ box-sizing:border-box;
 body{
 margin:0;
 min-height:100vh;
-font-family:Arial, sans-serif;
-background:
-linear-gradient(135deg,#050505,#111827,#064e3b);
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#050505,#111827,#064e3b);
 color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-overflow-x:hidden;
 }
-
-
-/* BACKGROUND EFFECT */
-
-body::before{
-content:"";
-position:fixed;
-width:300px;
-height:300px;
-background:#1db954;
-filter:blur(150px);
-opacity:.35;
-top:-100px;
-left:-100px;
-}
-
-
-/* PLAYER */
 
 .player{
-
 width:95%;
 max-width:430px;
-
-background:
-rgba(255,255,255,.08);
-
+background:rgba(255,255,255,.08);
 backdrop-filter:blur(20px);
-
 border-radius:30px;
-
 padding:25px;
-
-box-shadow:
-0 20px 50px #000;
-
-position:relative;
-
+box-shadow:0 20px 60px #000;
 }
 
-
-/* HEADER */
-
 .header{
-
 display:flex;
 justify-content:space-between;
-align-items:center;
-
 margin-bottom:20px;
-
 }
 
 .logo{
-
 font-size:22px;
 font-weight:bold;
-
 }
 
-.status{
-
-font-size:12px;
+.online{
 color:#1db954;
-
+font-size:12px;
 }
-
-
-
-/* COVER */
-
-.cover-box{
-
-display:flex;
-justify-content:center;
-
-}
-
 
 .cover{
-
 width:260px;
 height:260px;
-
+display:block;
+margin:auto;
 border-radius:25px;
-
 object-fit:cover;
-
-background:#222;
-
-box-shadow:
-0 15px 40px #000;
-
-transition:.5s;
-
+box-shadow:0 15px 40px #000;
 }
 
-
-
-.cover.playing{
-
-animation:rotate 8s linear infinite;
-
+.spin{
+animation:spin 8s linear infinite;
 }
 
-
-@keyframes rotate{
-
+@keyframes spin{
 from{
 transform:rotate(0deg);
 }
-
 to{
 transform:rotate(360deg);
 }
-
 }
-
-
-
-/* INFO */
 
 .info{
-
 text-align:center;
-
-margin-top:25px;
-
+margin-top:20px;
 }
-
 
 .title{
-
 font-size:24px;
 font-weight:bold;
-
 }
-
 
 .artist{
-
 color:#aaa;
 margin-top:5px;
-
 }
-
-
-
-/* EQUALIZER */
 
 .equalizer{
-
-height:35px;
-
 display:flex;
-
 justify-content:center;
-
 gap:5px;
-
+height:35px;
 margin:20px;
-
 }
-
 
 .bar{
-
 width:5px;
-height:15px;
-
+height:10px;
 background:#1db954;
-
 border-radius:10px;
-
 }
 
-
-.playing .bar{
-
+.eq .bar{
 animation:eq .8s infinite alternate;
-
 }
-
-
-.bar:nth-child(2){
-animation-delay:.2s;
-}
-
-.bar:nth-child(3){
-animation-delay:.4s;
-}
-
-.bar:nth-child(4){
-animation-delay:.6s;
-}
-
 
 @keyframes eq{
-
 from{
 height:10px;
 }
-
 to{
 height:35px;
 }
-
 }
 
+audio{
+display:none;
+}
 
-
-/* PROGRESS */
-
-.progress{
-
+input{
 width:100%;
-
 accent-color:#1db954;
-
 }
-
-
 
 .time{
-
 display:flex;
-
 justify-content:space-between;
-
 font-size:12px;
-
 color:#aaa;
-
 }
-
-
-
-/* BUTTON */
 
 .controls{
-
 display:flex;
-
 justify-content:center;
-
 align-items:center;
-
-gap:20px;
-
+gap:15px;
 margin:25px 0;
-
 }
-
 
 button{
-
 border:none;
-
 cursor:pointer;
-
 }
 
-
-.main-btn{
-
+.main{
 width:65px;
 height:65px;
-
 border-radius:50%;
-
 background:#1db954;
-
 font-size:25px;
-
 }
 
-
-.side-btn{
-
+.side{
 width:45px;
 height:45px;
-
 border-radius:50%;
-
 background:#333;
-
 color:white;
-
 }
-
-
-
-/* VOLUME */
-
-.volume{
-
-width:100%;
-
-accent-color:#1db954;
-
-}
-
-
-
-/* SEARCH */
 
 .search{
-
-width:100%;
-
-padding:12px;
-
-border-radius:15px;
-
-border:none;
-
-margin-top:20px;
-
 background:#ffffff15;
-
+border:none;
+padding:12px;
+border-radius:15px;
 color:white;
-
-outline:none;
-
+margin-top:15px;
 }
-
-
-
-/* PLAYLIST */
 
 .playlist{
-
 margin-top:15px;
-
-max-height:220px;
-
-overflow-y:auto;
-
+max-height:200px;
+overflow:auto;
 }
-
 
 .song{
-
 padding:12px;
-
-border-radius:15px;
-
-cursor:pointer;
-
-margin-bottom:5px;
-
+border-radius:12px;
 background:#ffffff08;
-
+margin-bottom:5px;
+cursor:pointer;
 }
 
-
-.song:hover{
-
-background:#ffffff20;
-
-}
-
-
+.song:hover,
 .active{
-
 background:#1db95433;
-
-}
-
-
-
-/* MOBILE */
-
-@media(max-width:500px){
-
-.cover{
-
-width:220px;
-height:220px;
-
-}
-
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <div class="player">
 
-
 <div class="header">
-
-<div class="logo">
-🎧 Sedatur Music
+<div class="logo">🎧 Sedatur Music</div>
+<div class="online">● Online</div>
 </div>
-
-<div class="status">
-● Online
-</div>
-
-</div>
-
-
-
-<div class="cover-box">
 
 <img id="cover"
 class="cover"
 src="https://via.placeholder.com/500">
 
-</div>
-
-
-
 <div class="info">
-
-<div id="title" class="title">
-Loading...
+<div id="title" class="title">Loading...</div>
+<div id="artist" class="artist">Sedatur</div>
 </div>
 
-<div id="artist" class="artist">
-Sedatur
-</div>
-
-</div>
-
-
-
-<div class="equalizer">
-
+<div id="eq" class="equalizer">
 <div class="bar"></div>
 <div class="bar"></div>
 <div class="bar"></div>
 <div class="bar"></div>
-
 </div>
-
-
 
 <audio id="audio"></audio>
 
-
-
-<input id="progress"
-class="progress"
-type="range"
-value="0">
-
-
+<input id="progress" type="range" value="0">
 
 <div class="time">
-
-<span id="current">
-0:00
-</span>
-
-<span id="duration">
-0:00
-</span>
-
+<span id="current">0:00</span>
+<span id="duration">0:00</span>
 </div>
-
-
 
 <div class="controls">
-
-<button class="side-btn">
-🔀
-</button>
-
-<button onclick="prev()" class="side-btn">
-⏮
-</button>
-
-
-<button onclick="playPause()" id="play"
-class="main-btn">
-▶️
-</button>
-
-
-<button onclick="next()" class="side-btn">
-⏭
-</button>
-
-
-<button class="side-btn">
-🔁
-</button>
-
-
+<button onclick="shuffle()" class="side">🔀</button>
+<button onclick="prev()" class="side">⏮</button>
+<button onclick="playPause()" id="play" class="main">▶️</button>
+<button onclick="next()" class="side">⏭</button>
+<button onclick="repeat()" id="repeat" class="side">🔁</button>
 </div>
 
-
-
-🔊
-
 <input id="volume"
-class="volume"
 type="range"
 min="0"
 max="1"
 step="0.1"
 value="1">
 
-
-
 <input id="search"
 class="search"
 placeholder="🔎 Cari lagu...">
 
-
-
-<div id="playlist"
-class="playlist">
+<div id="playlist" class="playlist"></div>
 
 </div>
-
-
-
-</div>
-
 
 <script>
 
+const songs = [
 
-let songs=[];
+{
+title:"Dunia Yang Nanti",
+artist:"Raim Laode",
+cover:"https://via.placeholder.com/500",
+file:"https://drive.google.com/uc?export=download&id=1hKYtkdxLyzxXe82G276OZhx0KtARafo7"
+},
+
+{
+title:"Ini Abadi",
+artist:"Perunggu",
+cover:"https://via.placeholder.com/500",
+file:"https://drive.google.com/uc?export=download&id=1yr-9m1CPkh81pG-VfWXuPkvgFyQKkHGl"
+},
+
+{
+title:"Shape of My Heart",
+artist:"Backstreet Boy",
+cover:"https://via.placeholder.com/500",
+file:"https://drive.google.com/uc?export=download&id=1f6BfshxM5sT9ogVRQUZ-x7wnMLMhtOrG"
+}
+
+];
+
+
 let index=0;
-
 let isShuffle=false;
 let isRepeat=false;
 
 
 const audio=document.getElementById("audio");
-const cover=document.getElementById("cover");
 const title=document.getElementById("title");
 const artist=document.getElementById("artist");
+const cover=document.getElementById("cover");
 const playlist=document.getElementById("playlist");
-
 const playBtn=document.getElementById("play");
-
 const progress=document.getElementById("progress");
 const volume=document.getElementById("volume");
-
 const search=document.getElementById("search");
+const eq=document.getElementById("eq");
 
-
-/* LOAD PLAYLIST */
-
-fetch("playlist.json")
-
-.then(response=>response.json())
-
-.then(data=>{
-
-songs=data;
-
-loadSong();
-
-});
-
-
-
-/* LOAD SONG */
 
 
 function loadSong(){
 
 let song=songs[index];
 
-
 audio.src=song.file;
 
-
 title.innerHTML=song.title;
-
 artist.innerHTML=song.artist;
-
-
-if(song.cover){
 
 cover.src=song.cover;
 
-}
-
-
 renderPlaylist();
 
-
 }
 
-
-
-/* PLAY PAUSE */
 
 
 function playPause(){
-
 
 if(audio.paused){
 
@@ -633,130 +318,119 @@ audio.play();
 
 playBtn.innerHTML="⏸";
 
-cover.classList.add("playing");
+cover.classList.add("spin");
 
+eq.classList.add("eq");
 
 }else{
-
 
 audio.pause();
 
 playBtn.innerHTML="▶️";
 
-cover.classList.remove("playing");
+cover.classList.remove("spin");
 
-
-}
-
+eq.classList.remove("eq");
 
 }
 
+}
 
-
-/* NEXT */
 
 
 function next(){
-
 
 if(isShuffle){
 
 index=Math.floor(Math.random()*songs.length);
 
-
 }else{
-
 
 index++;
 
-
 if(index>=songs.length){
-
 index=0;
-
 }
 
-
 }
-
 
 loadSong();
-
 audio.play();
-
 
 }
 
-
-
-/* PREVIOUS */
 
 
 function prev(){
 
-
 index--;
 
-
 if(index<0){
-
 index=songs.length-1;
-
 }
-
 
 loadSong();
-
 audio.play();
-
 
 }
 
 
 
-/* AUTO NEXT */
+function shuffle(){
+
+isShuffle=!isShuffle;
+
+alert(
+isShuffle?
+"Shuffle Aktif 🔀":
+"Shuffle Mati"
+);
+
+}
+
+
+
+function repeat(){
+
+isRepeat=!isRepeat;
+
+document.getElementById("repeat").innerHTML =
+isRepeat ? "🔁✓" : "🔁";
+
+}
+
 
 
 audio.addEventListener("ended",()=>{
-
 
 if(isRepeat){
 
 audio.play();
 
-
 }else{
-
 
 next();
 
-
 }
-
 
 });
 
 
 
-/* PROGRESS */
-
-
 audio.addEventListener("timeupdate",()=>{
 
-
-let value=
+let persen=
 (audio.currentTime/audio.duration)*100;
 
-
-progress.value=value || 0;
+progress.value=persen || 0;
 
 
 document.getElementById("current").innerHTML=
-format(audio.currentTime);
+formatTime(audio.currentTime);
 
 
 document.getElementById("duration").innerHTML=
-format(audio.duration);
+formatTime(audio.duration);
 
 
 });
@@ -765,17 +439,11 @@ format(audio.duration);
 
 progress.oninput=function(){
 
-
 audio.currentTime=
 (this.value/100)*audio.duration;
 
-
 }
 
-
-
-
-/* VOLUME */
 
 
 volume.oninput=function(){
@@ -786,43 +454,27 @@ audio.volume=this.value;
 
 
 
-/* FORMAT TIME */
-
-
-function format(sec){
-
+function formatTime(sec){
 
 if(isNaN(sec)){
-
 return "0:00";
-
 }
 
+let m=Math.floor(sec/60);
+let s=Math.floor(sec%60);
 
-let min=Math.floor(sec/60);
-
-let second=Math.floor(sec%60);
-
-
-if(second<10){
-
-second="0"+second;
-
+if(s<10){
+s="0"+s;
 }
 
-
-return min+":"+second;
-
+return m+":"+s;
 
 }
 
 
 
 
-/* PLAYLIST */
-
-
-function renderPlaylist(filter=""){
+function renderPlaylist(keyword=""){
 
 
 playlist.innerHTML="";
@@ -832,13 +484,14 @@ songs.forEach((song,i)=>{
 
 
 if(
+
 !song.title.toLowerCase()
-.includes(filter.toLowerCase())
+.includes(keyword.toLowerCase())
 
 &&
 
 !song.artist.toLowerCase()
-.includes(filter.toLowerCase())
+.includes(keyword.toLowerCase())
 
 ){
 
@@ -849,7 +502,6 @@ return;
 
 
 let item=document.createElement("div");
-
 
 item.className="song";
 
@@ -863,7 +515,6 @@ item.classList.add("active");
 
 
 item.innerHTML=
-
 "🎵 "+song.title+
 "<br><small>"+song.artist+"</small>";
 
@@ -871,13 +522,11 @@ item.innerHTML=
 
 item.onclick=function(){
 
-
 index=i;
 
 loadSong();
 
 audio.play();
-
 
 };
 
@@ -889,157 +538,22 @@ playlist.appendChild(item);
 
 });
 
-
 }
 
-
-
-/* SEARCH */
 
 
 search.oninput=function(){
 
-
 renderPlaylist(this.value);
 
-
 };
 
 
 
-/* SHUFFLE BUTTON */
+loadSong();
 
-
-document.querySelector(".controls button")
-.onclick=function(){
-
-
-isShuffle=!isShuffle;
-
-
-this.innerHTML=
-isShuffle ? "🔀✓" : "🔀";
-
-
-};
 
 </script>
 
-
 </body>
 </html>
-
-// FAVORITE SYSTEM
-
-let favorites=
-JSON.parse(localStorage.getItem("sedaturFav"))
-|| [];
-
-
-
-function favorite(){
-
-let song=songs[index];
-
-
-if(favorites.includes(song.title)){
-
-
-favorites=
-favorites.filter(
-item=>item!==song.title
-);
-
-
-document.getElementById("fav")
-.innerHTML="🤍";
-
-
-}else{
-
-
-favorites.push(song.title);
-
-
-document.getElementById("fav")
-.innerHTML="❤️";
-
-
-}
-
-
-localStorage.setItem(
-"sedaturFav",
-JSON.stringify(favorites)
-);
-
-
-}
-
-
-
-
-// REPEAT BUTTON
-
-
-let repeatBtn=
-document.querySelectorAll(".controls button")[4];
-
-
-repeatBtn.onclick=function(){
-
-
-isRepeat=!isRepeat;
-
-
-this.innerHTML=
-isRepeat ? "🔁✓" : "🔁";
-
-
-};
-
-
-
-
-// UPDATE FAVORITE ICON
-
-
-function updateFavorite(){
-
-
-let song=songs[index];
-
-
-if(
-favorites.includes(song.title)
-){
-
-document.getElementById("fav")
-.innerHTML="❤️";
-
-
-}else{
-
-document.getElementById("fav")
-.innerHTML="🤍";
-
-}
-
-
-}
-
-
-
-
-// TAMBAHAN LOAD SONG
-
-let oldLoadSong=loadSong;
-
-
-loadSong=function(){
-
-oldLoadSong();
-
-updateFavorite();
-
-};
