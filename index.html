@@ -15,6 +15,7 @@ box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
 
+
 body{
 
 margin:0;
@@ -25,6 +26,7 @@ align-items:center;
 justify-content:center;
 
 background:#0f172a;
+
 color:white;
 
 padding:20px;
@@ -48,7 +50,7 @@ text-align:center;
 }
 
 
-.cover{
+.logo{
 
 width:220px;
 height:220px;
@@ -63,6 +65,7 @@ border-radius:20px;
 h1{
 
 font-size:24px;
+
 margin:20px 0 5px;
 
 }
@@ -78,6 +81,7 @@ color:#94a3b8;
 audio{
 
 width:100%;
+
 margin-top:20px;
 
 }
@@ -85,7 +89,7 @@ margin-top:20px;
 
 button{
 
-border:0;
+border:none;
 
 background:#facc15;
 
@@ -96,6 +100,17 @@ border-radius:30px;
 font-size:20px;
 
 margin:15px 5px 0;
+
+}
+
+
+.status{
+
+margin-top:15px;
+
+font-size:13px;
+
+color:#94a3b8;
 
 }
 
@@ -110,11 +125,11 @@ margin:15px 5px 0;
 <div class="player">
 
 
-<img id="cover" class="cover" src="logo.png">
+<img id="cover" class="logo" src="logo.png">
 
 
 <h1 id="title">
-Memuat...
+Memuat playlist...
 </h1>
 
 
@@ -123,15 +138,27 @@ Sedatur Music Hub
 </p>
 
 
+
 <audio id="audio" controls></audio>
+
 
 
 <div>
 
-<button onclick="prev()">⏮</button>
+<button onclick="previousSong()">
+⏮
+</button>
 
-<button onclick="next()">⏭</button>
 
+<button onclick="nextSong()">
+⏭
+</button>
+
+</div>
+
+
+<div id="status" class="status">
+Menghubungkan playlist...
 </div>
 
 
@@ -144,128 +171,201 @@ Sedatur Music Hub
 
 let playlist=[];
 
-let index=0;
+let current=0;
+
 
 
 const audio=document.getElementById("audio");
+
 const cover=document.getElementById("cover");
+
 const title=document.getElementById("title");
+
 const artist=document.getElementById("artist");
 
+const status=document.getElementById("status");
+
+
+
+
+// LOAD PLAYLIST
 
 
 fetch("playlist.json")
 
-.then(res=>res.json())
+.then(response=>{
 
-.then(data=>{
 
-playlist=data;
+if(!response.ok){
 
-loadSong();
+throw new Error("playlist.json tidak ditemukan");
+
+}
+
+
+return response.json();
+
 
 })
 
-.catch(()=>{
+
+.then(data=>{
+
+
+playlist=data;
+
+
+status.innerHTML="Playlist siap";
+
+
+loadSong();
+
+
+})
+
+
+.catch(error=>{
+
 
 title.innerHTML="Playlist Error";
+
+status.innerHTML=error.message;
+
 
 });
 
 
 
 
+
+
+
 function loadSong(){
 
-const song=playlist[index];
+
+let song=playlist[current];
 
 
 audio.src=song.file;
 
+
 cover.src=song.cover;
 
+
 title.innerHTML=song.title;
+
 
 artist.innerHTML=song.artist;
 
 
 updateMedia();
 
-}
-
-
-
-
-function next(){
-
-index++;
-
-if(index>=playlist.length){
-
-index=0;
 
 }
+
+
+
+
+
+
+
+function nextSong(){
+
+
+current++;
+
+
+if(current>=playlist.length){
+
+current=0;
+
+}
+
 
 loadSong();
 
+
 audio.play();
 
-}
-
-
-
-
-function prev(){
-
-index--;
-
-if(index<0){
-
-index=playlist.length-1;
 
 }
+
+
+
+
+
+
+function previousSong(){
+
+
+current--;
+
+
+if(current<0){
+
+current=playlist.length-1;
+
+}
+
 
 loadSong();
 
+
 audio.play();
 
+
 }
+
+
 
 
 
 
 audio.onended=function(){
 
-next();
+nextSong();
 
 };
 
 
 
 
-// Background Control
+
+
+
+// BACKGROUND CONTROL
+
 
 function updateMedia(){
 
 
-if(!("mediaSession" in navigator)) return;
+if(!("mediaSession" in navigator)){
+
+return;
+
+}
 
 
-navigator.mediaSession.metadata =
+
+navigator.mediaSession.metadata=
 new MediaMetadata({
 
-title:playlist[index].title,
+title:playlist[current].title,
 
-artist:playlist[index].artist,
+artist:playlist[current].artist,
 
 album:"Sedatur Music Hub",
 
 artwork:[
 
 {
-src:playlist[index].cover,
+
+src:playlist[current].cover,
+
 sizes:"512x512",
+
 type:"image/png"
+
 }
 
 ]
@@ -274,17 +374,20 @@ type:"image/png"
 
 
 
+
+
 navigator.mediaSession.setActionHandler(
 "nexttrack",
-next
+nextSong
 );
 
 
 
 navigator.mediaSession.setActionHandler(
 "previoustrack",
-prev
+previousSong
 );
+
 
 
 navigator.mediaSession.setActionHandler(
@@ -293,10 +396,12 @@ navigator.mediaSession.setActionHandler(
 );
 
 
+
 navigator.mediaSession.setActionHandler(
 "pause",
 ()=>audio.pause()
 );
+
 
 
 }
