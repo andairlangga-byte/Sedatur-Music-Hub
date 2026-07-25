@@ -2,19 +2,19 @@
   {
     "title": "Dunia Yang Nanti",
     "artist": "Raim Laode",
-    "cover": "cover/lagu1.jpg",
-    "file": "https://drive.google.com/uc?export=download&id=1hKYtkdxLyzxXe82G276OZhx0KtARafo7"
+    "cover": "logo.png",
+    "file": "dunia-yang-nanti.mp3"
   },
   {
     "title": "Ini Abadi",
     "artist": "Perunggu",
-    "cover": "cover/lagu2.jpg",
-    "file": "https://drive.google.com/uc?export=download&id=1yr-9m1CPkh81pG-VfWXuPkvgFyQKkHGl"
+    "cover": "logo.png",
+    "file": "ini-abadi.mp3"
   },
   {
     "title": "Shape of My Heart",
-    "artist": "Backstreet Boy",
-    "cover": "cover/lagu3.jpg",
-    "file": "https://drive.google.com/uc?export=download&id=1f6BfshxM5sT9ogVRQUZ-x7wnMLMhtOrG"
+    "artist": "Backstreet Boys",
+    "cover": "logo.png",
+    "file": "shape-of-my-heart.mp3"
   }
 ]
